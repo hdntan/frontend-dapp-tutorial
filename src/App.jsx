@@ -6,6 +6,7 @@ import { Contract } from 'ethers';
 import "./App.css";
 import SupplyComponent from "./SupplyComponent";
 import MintingComponent from "./MintingComponent";
+import PurchaseOccurredEvents from "./PurchaseOccurredEvents";
 
 const styles = {
   box: {minHeight: "100vh", backgroundColor: "#1b3864" },
@@ -48,6 +49,7 @@ function App() {
           <h1 style={styles.alignCenter}>Mint Your Token!</h1>
           <SupplyComponent contract={contract} />
           <MintingComponent contract={contract} />
+          <PurchaseOccurredEvents contract={contract} />
         </Card>
       </Grid>
     </Box>
