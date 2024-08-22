@@ -11,6 +11,15 @@ const styles = {
 };
 
 function App() {
+
+  const { activateBrowserWallet, deactivate, account } = useEthers();
+
+  // Handle the wallet toggle
+  const handleWalletConnection = () => {
+    if (account) deactivate();
+    else activateBrowserWallet();
+  };
+
   return (
     <Box sx={styles.box}>
       <Grid
@@ -20,7 +29,13 @@ function App() {
         justifyContent="center"
         style={styles.vh100}
       >
-        {/* This is where we'll be putting our functional components! */}
+       <Box position='absolute' top={8} right={16}>
+          <Button variant='contained' onClick={handleWalletConnection}>
+            {account
+              ? `Disconnect ${account.substring(0, 5)}...`
+              : 'Connect Wallet'}
+          </Button>
+        </Box>
       </Grid>
     </Box>
   );
