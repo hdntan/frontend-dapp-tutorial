@@ -4,9 +4,10 @@ import { Box } from "@mui/system";
 import MintableERC20 from './MintableERC20.json'; 
 import { Contract } from 'ethers';
 import "./App.css";
+import SupplyComponent from "./SupplyComponent";
 
 const styles = {
-  box: { minHeight: "100vh", backgroundColor: "#1b3864" },
+  box: {minHeight: "100vh", backgroundColor: "#1b3864" },
   vh100: { minHeight: "100vh" },
   card: { borderRadius: 4, padding: 4, maxWidth: "550px", width: "100%" },
   alignCenter: { textAlign: "center" },
@@ -42,6 +43,10 @@ function App() {
               : 'Connect Wallet'}
           </Button>
         </Box>
+        <Card sx={styles.card}>
+          <h1 style={styles.alignCenter}>Mint Your Token!</h1>
+          <SupplyComponent contract={contract} />
+        </Card>
       </Grid>
     </Box>
   );

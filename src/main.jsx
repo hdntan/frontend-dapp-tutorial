@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { DAppProvider, MoonbaseAlpha } from '@usedapp/core';
 import { getDefaultProvider } from 'ethers';
-import './index.css'
 
 
 const config = {
