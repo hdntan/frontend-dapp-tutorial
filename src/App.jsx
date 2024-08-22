@@ -1,6 +1,8 @@
 import { useEthers } from "@usedapp/core";
 import { Button, Grid, Card } from "@mui/material";
 import { Box } from "@mui/system";
+import MintableERC20 from './MintableERC20.json'; 
+import { Contract } from 'ethers';
 import "./App.css";
 
 const styles = {
@@ -10,15 +12,19 @@ const styles = {
   alignCenter: { textAlign: "center" },
 };
 
+const contractAddress = '0x59A62d9c153Cb458050882ac4bC0cB2F5544BeD4';
 function App() {
-
+  const contract = new Contract(contractAddress, MintableERC20.abi);
   const { activateBrowserWallet, deactivate, account } = useEthers();
+  
 
   // Handle the wallet toggle
   const handleWalletConnection = () => {
     if (account) deactivate();
     else activateBrowserWallet();
   };
+
+  
 
   return (
     <Box sx={styles.box}>
