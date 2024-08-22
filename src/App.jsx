@@ -5,6 +5,7 @@ import MintableERC20 from './MintableERC20.json';
 import { Contract } from 'ethers';
 import "./App.css";
 import SupplyComponent from "./SupplyComponent";
+import MintingComponent from "./MintingComponent";
 
 const styles = {
   box: {minHeight: "100vh", backgroundColor: "#1b3864" },
@@ -46,6 +47,7 @@ function App() {
         <Card sx={styles.card}>
           <h1 style={styles.alignCenter}>Mint Your Token!</h1>
           <SupplyComponent contract={contract} />
+          <MintingComponent contract={contract} />
         </Card>
       </Grid>
     </Box>
