@@ -1,4 +1,4 @@
-# React + Vite
+## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -7,7 +7,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Create a React Project with useDapp
+# Create a React Project with useDapp
 
 Let's set up a new React project within our Hardhat project's folder. We'll use `create-react-app` to generate a new frontend directory:
 
@@ -21,7 +21,7 @@ npm install ethers@5.6.9 @usedapp/core @mui/material @mui/system @emotion/react 
 - useDApp: A package that utilizes Ethers.js and formats them into React hooks, making it more suitable for frontend projects.
 - MUI Packages: Includes @mui/material, @mui/system, @emotion/react, and @emotion/styled for styling and UI components.
 
-# Setting Up App.js
+## Setting Up App.js
 
 Next, we need to set up the App.js file located in the frontend/src directory to add some visual structure to our project.
 
@@ -59,9 +59,9 @@ You can start the React project by running the following command from within the
 ```
 npm run start
 ```
-## Providers, Signers, and Wallets
+# Providers, Signers, and Wallets
 
-# Create a Provider
+## Create a Provider
 
 To begin using the useDApp package, let's do some initial setup. Open the `index.js` file in your React frontend project, located in the `frontend/src` directory. We'll add a `DAppProvider` component and its configuration. This component acts similarly to the Ethers.js provider object but is designed to be used throughout your entire project via useDApp hooks.
 
@@ -93,7 +93,7 @@ root.render(
 );
 ```
 
-# Connect to a Wallet
+## Connect to a Wallet
 
 Next, let's add a button in the `App.js` file that allows users to connect to MetaMask. Thanks to `useDApp`, we don't need to write wallet-specific code, as the `useEthers` hook takes care of that for us.
 
@@ -132,7 +132,7 @@ function App() {
 };
 ```
 
-## Read Data from Smart Contracts
+# Read Data from Smart Contracts
 
 Copy the `MintableERC20.json` file from `artifacts/contracts` in the Hardhat project to the `frontend/src` directory.
 
@@ -154,7 +154,7 @@ Copy the `MintableERC20.json` file from `artifacts/contracts` in the Hardhat pro
     ...
 ...
 ```
-# Create a Smart Contract Instance
+## Create a Smart Contract Instance
 
 To interact with our smart contract, we need to create a contract object instance using the contract's address and ABI. We'll do this in the `App.js` file.
 
@@ -173,7 +173,7 @@ function App() {
   // ...
 }
 ```
-# Interact with the Contract Interface to Read Supply Data
+## Interact with the Contract Interface to Read Supply Data
 
 And let's create a new SupplyComponent within a new SupplyComponent.js file, which will use the contract interface to retrieve the token supply data and display it:
 
@@ -225,12 +225,10 @@ function App() {
 }
 ```
 
-## Send Transactions
+# Send Transactions
 
 If you recall from our smart contract, we want to mint some tokens by calling the purchaseMint function with some native currency. So we're going to need:
 Let's create a new component called MintingComponent in a new file called MintingComponent.js.
-
-1. A text input to let the user specify how much value to enter.
 
 ```
 import { useState } from 'react';
@@ -241,6 +239,16 @@ import { utils } from 'ethers';
 export default function MintingComponent({ contract }) {
   const [value, setValue] = useState(0);
   const textFieldStyle = { marginBottom: '16px' };
+
+  const { account, chainId, switchNetwork } = useEthers();
+  const { state, send } = useContractFunction(contract, 'purchaseMint');
+  const handlePurchaseMint = async () => {
+    if (chainId !== MoonbaseAlpha.chainId) {
+      await switchNetwork(MoonbaseAlpha.chainId);
+    }
+    send({ value: utils.parseEther(value.toString()) });
+  };
+  const isMining = state?.status === 'Mining';
 
   return (
     <>
@@ -254,32 +262,6 @@ export default function MintingComponent({ contract }) {
           style={textFieldStyle} 
         />
       </Grid>
-      {/* This is where we'll add the button */}
-    </>
-  );
-}
-```
-
-2. A button to let the user initiate the transaction.
-
-```
-export default function MintingComponent({ contract }) {
-  // ...
-
-  // Mint transaction
-  const { account, chainId, switchNetwork } = useEthers();
-  const { state, send } = useContractFunction(contract, 'purchaseMint');
-  const handlePurchaseMint = async () => {
-    if (chainId !== MoonbaseAlpha.chainId) {
-      await switchNetwork(MoonbaseAlpha.chainId);
-    }
-    send({ value: utils.parseEther(value.toString()) });
-  };
-  const isMining = state?.status === 'Mining';
-
-  return (
-    <>
-      {/* ... */}
       <Grid item xs={12}>
         <Button
           variant='contained' color='primary' fullWidth
@@ -316,7 +298,7 @@ function App() {
 }
 ```
 
-## Read Events from Contracts
+# Read Events from Contracts
 
 We created an event in our smart contract: event PurchaseOccurred(address minter, uint256 amount), so let's figure out how to display its information in the frontend.
 
