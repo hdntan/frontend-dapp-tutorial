@@ -9,7 +9,7 @@ Currently, two official plugins are available:
 
 # Create a React Project with useDapp
 
-Chúng ta hãy thiết lập một dự án React mới trong thư mục dự án Hardhat của mình. Chúng ta sẽ sử dụng create-react-app để tạo ra một thư mục frontend mới:
+Chúng ta hãy thiết lập một dự án React mới trong thư mục dự án Hardhat của mình:
 
 ```
 npm create vite@latest frontend -- --template react
