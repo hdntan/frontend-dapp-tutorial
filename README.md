@@ -9,7 +9,7 @@ Currently, two official plugins are available:
 
 # Create a React Project with useDapp
 
-Chúng ta hãy thiết lập một dự án React mới trong thư mục dự án Hardhat của mình:
+Thiết lập một dự án React mới:
 
 ```
 npm create vite@latest frontend -- --template react
@@ -24,7 +24,7 @@ npm install ethers@5.6.9 @usedapp/core @mui/material @mui/system @emotion/react 
 
 ## Setting Up App.jsx
 
-Tiếp theo, chúng ta cần thiết lập tệp `App.jsx` nằm trong thư mục `frontend/src` để thêm một số cấu trúc hiển thị cho dự án của mình.
+Tiếp theo, thiết lập file `App.jsx` nằm trong thư mục `frontend/src` để thêm một số cấu trúc hiển thị cho dự án.
 
 ```
 import { useEthers } from '@usedapp/core';
@@ -57,7 +57,7 @@ function App() {
 export default App;
 ```
 
-Bạn có thể khởi động dự án React bằng cách chạy lệnh sau từ trong thư mục frontend:
+Run dự án React bằng cách chạy lệnh sau từ trong thư mục frontend:
 
 ```
 npm run dev
@@ -66,7 +66,7 @@ npm run dev
 
 ## Create a Provider
 
-Để bắt đầu sử dụng gói useDApp, hãy thực hiện một số thiết lập ban đầu. Mở tệp `main.jsx` trong dự án frontend React của bạn, nằm trong thư mục frontend/src. Chúng ta sẽ thêm một thành phần `DAppProvider` và cấu hình cho nó. Thành phần này hoạt động tương tự như đối tượng provider của Ethers.js nhưng được thiết kế để sử dụng xuyên suốt dự án của bạn thông qua các hook của useDApp.
+Để bắt đầu sử dụng gói useDApp, hãy thực hiện một số thiết lập ban đầu. Mở file `main.jsx` trong dự án frontend React của bạn, nằm trong thư mục frontend/src. Chúng ta sẽ thêm một thành phần `DAppProvider` và cấu hình cho nó. Thành phần này hoạt động tương tự như đối tượng provider của Ethers.js nhưng được thiết kế để sử dụng xuyên suốt dự án của bạn thông qua các hook của useDApp.
 
 1. Mở tệp `frontend/src/main.jsx`.
 2. Bọc ứng dụng của bạn với `DAppProvider` và cấu hình nó theo nhu cầu.
