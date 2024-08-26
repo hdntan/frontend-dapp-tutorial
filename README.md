@@ -60,7 +60,7 @@ export default App;
 Bạn có thể khởi động dự án React bằng cách chạy lệnh sau từ trong thư mục frontend:
 
 ```
-npm run start
+npm run dev
 ```
 # Providers, Signers, and Wallets
 
