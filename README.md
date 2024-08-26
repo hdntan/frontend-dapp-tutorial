@@ -9,23 +9,24 @@ Currently, two official plugins are available:
 
 # Create a React Project with useDapp
 
-Let's set up a new React project within our Hardhat project's folder. We'll use `create-react-app` to generate a new frontend directory:
+Chúng ta hãy thiết lập một dự án React mới trong thư mục dự án Hardhat của mình. Chúng ta sẽ sử dụng create-react-app để tạo ra một thư mục frontend mới:
 
 ```
-npx create-react-app frontend
+npm create vite@latest frontend -- --template react
 cd frontend
 npm install ethers@5.6.9 @usedapp/core @mui/material @mui/system @emotion/react @emotion/styled
 ```
- Explanation of Dependencies
-- Ethers.js: A library that assists with JSON-RPC communication.
-- useDApp: A package that utilizes Ethers.js and formats them into React hooks, making it more suitable for frontend projects.
-- MUI Packages: Includes @mui/material, @mui/system, @emotion/react, and @emotion/styled for styling and UI components.
 
-## Setting Up App.js
+ Giải thích về các thư viện phụ thuộc:
+- Ethers.js: Một thư viện giúp giao tiếp với `JSON-RPC`.
+- useDApp: Một gói thư viện sử dụng `Ethers.js` và chuyển đổi chúng thành các hook của React, giúp phù hợp hơn cho các dự án frontend.
+- MUI Packages: Bao gồm `@mui/material, @mui/system, @emotion/react, và @emotion/styled` để tạo kiểu và các thành phần giao diện người dùng (UI components).
 
-Next, we need to set up the App.js file located in the frontend/src directory to add some visual structure to our project.
+## Setting Up App.jsx
 
-  ```
+Tiếp theo, chúng ta cần thiết lập tệp `App.jsx` nằm trong thư mục `frontend/src` để thêm một số cấu trúc hiển thị cho dự án của mình.
+
+```
 import { useEthers } from '@usedapp/core';
 import { Button, Grid, Card } from '@mui/material';
 import { Box } from '@mui/system';
@@ -55,7 +56,9 @@ function App() {
 
 export default App;
 ```
-You can start the React project by running the following command from within the frontend directory:
+
+Bạn có thể khởi động dự án React bằng cách chạy lệnh sau từ trong thư mục frontend:
+
 ```
 npm run start
 ```
@@ -63,10 +66,11 @@ npm run start
 
 ## Create a Provider
 
-To begin using the useDApp package, let's do some initial setup. Open the `index.js` file in your React frontend project, located in the `frontend/src` directory. We'll add a `DAppProvider` component and its configuration. This component acts similarly to the Ethers.js provider object but is designed to be used throughout your entire project via useDApp hooks.
+Để bắt đầu sử dụng gói useDApp, hãy thực hiện một số thiết lập ban đầu. Mở tệp `main.jsx` trong dự án frontend React của bạn, nằm trong thư mục frontend/src. Chúng ta sẽ thêm một thành phần `DAppProvider` và cấu hình cho nó. Thành phần này hoạt động tương tự như đối tượng provider của Ethers.js nhưng được thiết kế để sử dụng xuyên suốt dự án của bạn thông qua các hook của useDApp.
 
-1. Open `frontend/src/index.js`.
-2. Wrap your application with the `DAppProvider` and configure it as needed.
+1. Mở tệp `frontend/src/main.jsx`.
+2. Bọc ứng dụng của bạn với `DAppProvider` và cấu hình nó theo nhu cầu.
+
 ```
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -95,10 +99,10 @@ root.render(
 
 ## Connect to a Wallet
 
-Next, let's add a button in the `App.js` file that allows users to connect to MetaMask. Thanks to `useDApp`, we don't need to write wallet-specific code, as the `useEthers` hook takes care of that for us.
+Tiếp theo, hãy thêm một nút vào tệp `App.jsx` để cho phép người dùng kết nối với MetaMask. Nhờ có `useDApp`, chúng ta không cần phải viết mã cụ thể cho ví, vì hook `useEthers` sẽ lo liệu việc đó cho chúng ta.
 
-1. Open `frontend/src/App.js`.
-2. Use the `useEthers` hook to handle wallet connections.
+1. Mở tệp `frontend/src/App.jsx`.
+2. Sử dụng hook `useEthers` để xử lý việc kết nối với ví.
 
 ```
 function App() {
@@ -134,7 +138,7 @@ function App() {
 
 # Read Data from Smart Contracts
 
-Copy the `MintableERC20.json` file from `artifacts/contracts` in the Hardhat project to the `frontend/src` directory.
+Sao chép tệp `MintableERC20.json` từ thư mục `artifacts/contracts` trong dự án Hardhat vào thư mục `frontend/src`.
 
 ```
 |--artifacts
@@ -156,10 +160,10 @@ Copy the `MintableERC20.json` file from `artifacts/contracts` in the Hardhat pro
 ```
 ## Create a Smart Contract Instance
 
-To interact with our smart contract, we need to create a contract object instance using the contract's address and ABI. We'll do this in the `App.js` file.
+Để tương tác với hợp đồng thông minh của chúng ta, chúng ta cần tạo một đối tượng hợp đồng sử dụng địa chỉ và ABI của hợp đồng. Chúng ta sẽ thực hiện việc này trong tệp `App.jsx`.
 
-1. Let's import the JSON file and the Ethers Contract object within App.js. 
-2. Create a Contract instance: Use the contract's address and ABI to create an instance of the contract.
+1. Hãy import tệp JSON và đối tượng Ethers Contract vào trong App.jsx.
+2. Tạo một đối tượng Contract: Sử dụng địa chỉ và ABI của hợp đồng để tạo một instance của hợp đồng.
 
 ```
 // ... other imports
@@ -175,7 +179,7 @@ function App() {
 ```
 ## Interact with the Contract Interface to Read Supply Data
 
-And let's create a new SupplyComponent within a new SupplyComponent.js file, which will use the contract interface to retrieve the token supply data and display it:
+Và hãy tạo một component mới có tên `SupplyComponent` trong một tệp mới là `SupplyComponent.jsx`, component này sẽ sử dụng giao diện hợp đồng để truy xuất dữ liệu về nguồn cung token và hiển thị nó.
 
 ```
 import { useCall } from '@usedapp/core';
@@ -204,7 +208,7 @@ export default function SupplyComponent({ contract }) {
 }
 ```
 
-Now we can spice up our frontend and call the read-only functions in the contract. We'll update the frontend so that we have a place to display our supply data:
+Bây giờ, chúng ta có thể làm cho giao diện frontend của mình thêm sinh động và gọi các hàm chỉ đọc trong contract. Chúng ta sẽ cập nhật frontend để có một nơi hiển thị về supply data:
 
 ```
 // ... other imports
@@ -227,8 +231,8 @@ function App() {
 
 # Send Transactions
 
-If you recall from our smart contract, we want to mint some tokens by calling the purchaseMint function with some native currency. So we're going to need:
-Let's create a new component called MintingComponent in a new file called MintingComponent.js.
+Nếu bạn nhớ từ smart contract của chúng ta, chúng ta muốn phát hành một số token bằng cách gọi hàm `purchaseMint` với một số tiền bằng đồng tiền gốc. Vì vậy, chúng ta sẽ cần:
+Tạo một component mới có tên `MintingComponent` trong một tệp mới gọi là `MintingComponent.jsx`.
 
 ```
 import { useState } from 'react';
@@ -276,7 +280,7 @@ export default function MintingComponent({ contract }) {
 }
 ```
 
-This code essentially boils down to using the useContractFunction hook in conjunction with the contract object, which is a lot simpler than what it does under the hood! Let's add this component to the main App.js file.
+Mã này chủ yếu là việc sử dụng hook `useContractFunction` kết hợp với contract object, điều này đơn giản hơn rất nhiều so với những gì nó thực hiện dưới lớp! Hãy thêm component này vào tệp chính `App.jsx`.
 
 ```
 // ... other imports
@@ -300,9 +304,9 @@ function App() {
 
 # Read Events from Contracts
 
-We created an event in our smart contract: event PurchaseOccurred(address minter, uint256 amount), so let's figure out how to display its information in the frontend.
+Chúng ta đã tạo một sự kiện trong smart contract của mình: `event PurchaseOccurred(address minter, uint256 amount)`, vì vậy hãy tìm cách hiển thị thông tin của nó trên frontend.
 
-Let's create a new component PurchaseOccurredEvents within a new file PurchaseOccurredEvents.js that reads the last five logs and displays them in a table:
+Hãy tạo một component mới có tên `PurchaseOccurredEvents` trong một tệp mới là `PurchaseOccurredEvents.jsx`, component này sẽ đọc năm nhật ký gần đây nhất và hiển thị chúng trong một bảng.
 
 ```
 import { useLogs, useBlockNumber } from '@usedapp/core';
@@ -350,10 +354,10 @@ export default function PurchaseOccurredEvents({ contract }) {
     </Grid>
   );
 }
-}
 ```
 
-This too should be added to App.js.
+Điều này cũng nên được thêm vào `App.jsx`.
+
 
 ```
 // ... other imports
@@ -376,7 +380,7 @@ function App() {
 }
 ```
 
-![image](https://github.com/user-attachments/assets/4df59a7a-324c-457d-9ebb-63a6c62e2bb8)
+
 
 
 
